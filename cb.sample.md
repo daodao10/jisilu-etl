@@ -1,7 +1,3 @@
-
-> jisilu@1.0.0 start /Volumes/Data/workspace/jisilu-etl  
-> babel-node cb.js
-
 | 代码 | 名称 | 发行日 | 到期日 | 赎回价 | 现价 | 转债价值 | 债券价值 |
 | :--: | :--: | :--: | :--: | ---: | ---: | ---: | ---: |
 | [110030](https://www.jisilu.cn/data/convert_bond_detail/110030) | 格力转债 | 2014-12-25 | 2019-12-25 | 106 | 107.12 | 107.305 | 100.165 |
@@ -66,3 +62,4 @@
 | [128035](https://www.jisilu.cn/data/convert_bond_detail/128035) | 大族转债 | 2018-02-06 | 2024-02-06 | 105 | 100 | 106.499 | 86.29 |
 | [113019](https://www.jisilu.cn/data/convert_bond_detail/113019) | 玲珑转债 | 2018-03-01 | 2023-03-01 | 110 | 100 | 110 | 95.16 |
 | [113504](https://www.jisilu.cn/data/convert_bond_detail/113504) | 艾华转债 | 2018-03-02 | 2024-03-01 | 106 | 100 | 106 | 89.994 |
+updated @ 3/3/2018

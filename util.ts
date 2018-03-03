@@ -38,6 +38,7 @@ function toMarkdownTable_jsl(rows: Array<Object>): void {
 
         console.log(`| ${cells.join(' | ')} |`);
     });
+    console.log(`updated @ ${new Date().toLocaleDateString()}`)
 }
 
 function toMarkdownTable(rows: Array<Object>): void {
