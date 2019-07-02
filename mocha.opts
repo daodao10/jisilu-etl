@@ -1,4 +1,4 @@
 --reporter mochawesome
 --recursive
---require babel-core/register
+--require @babel/register
 --reporter-options reportDir=report
