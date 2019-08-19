@@ -15,13 +15,13 @@ function toMarkdownTable_jsl(rows: Array<Object>): void {
 
     let headers = Object.keys(rows[0]);
 
-    console.log('| 序号 | 代码 | 名称 | 发行日 | 到期日 | 赎回价 | 现价 | 转债价值 | 纯债价值 | 评级 | 溢价率 | 到期收益 |');
-    console.log('| :--: | :--: | :--: | :--: | :--: | ---: | ---: | ---: | ---: | :--: | ---: | ---: |');
+    console.log('| 序号 | 名称 | 发行日 | 到期日 | 赎回价 | 现价 | 转债价值 | 纯债价值 | 评级 | 溢价率 | 到期收益 |');
+    console.log('| :--: | :--: | :--: | :--: | ---: | ---: | ---: | ---: | :--: | ---: | ---: |');
 
     rows.forEach((row, idx) => {
         let cells = headers.map(header => {
-            if (header === "id") {
-                return `[${row[header]}](https://www.jisilu.cn/data/convert_bond_detail/${row[header]})`;
+            if (header === "name") {
+                return `[${row[header]}](https://www.jisilu.cn/data/convert_bond_detail/${row['id']})`;
             }
             return row[header];
         });
@@ -33,11 +33,11 @@ function toMarkdownTable_jsl(rows: Array<Object>): void {
                 within6MonthsAdded = true;
                 console.log('| 6个月内 |');
             }
-            if (cells[5] < cells[7]) {
+            if (Math.floor(cells[5]) <= Math.floor(cells[7])) {
                 // 现价 < 纯债价值
                 cells[5] = `**${cells[5]}**`;
-            } else if (cells[5] > 131) {
-                // 现价 > 131
+            } else if (cells[5] > 130) {
+                // 现价 > 130
                 cells[5] = `~~${cells[5]}~~`;
             }
         } else if (row["issue_dt"] > within2Years) {
@@ -46,29 +46,30 @@ function toMarkdownTable_jsl(rows: Array<Object>): void {
                 console.log('| 2年内 |');
                 within2YearsAdded = true;
             }
-            if (cells[5] < cells[7]) {
+            if (Math.floor(cells[5]) <= Math.floor(cells[7])) {
                 // 现价 < 纯债价值
                 cells[5] = `**${cells[5]}**`;
-            } else if (cells[5] < 100) {
-                // 现价 < 100
+            } else if (cells[5] < 100.5 || cells[5] <= cells[7] + 1) {
+                // 现价 < 100.5
                 cells[5] = `*${cells[5]}*`;
             } else if (cells[5] > 130) {
                 cells[5] = `~~${cells[5]}~~`;
             }
         } else {
             // above 2 years
-            if (cells[5] < cells[7]) {
+            if (Math.floor(cells[5]) <= Math.floor(cells[7])) {
                 // 现价 < 纯债价值
                 cells[5] = `**${cells[5]}**`;
-            } else if (cells[5] < 101) {
-                // 现价 < 101
+            } else if (cells[5] < 100.5 || cells[5] <= cells[7] + 1) {
+                // 现价 < 100.5
                 cells[5] = `*${cells[5]}*`;
-            } else if (cells[5] > cells[6] || cells[5] > 131) {
-                // 现价 > 转债价值 || 现价 > 131
+            } else if (cells[5] > cells[6] || cells[5] > 130) {
+                // 现价 > 转债价值 || 现价 > 130
                 cells[5] = `~~${cells[5]}~~`;
             }
         }
 
+        cells.shift()
         cells.unshift(idx + 1)
         console.log(`| ${cells.join(' | ')} |`);
     });
